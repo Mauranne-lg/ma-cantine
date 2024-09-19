@@ -23,6 +23,8 @@ from .canteen import (  # noqa: F401
     TeamJoinRequestView,
     ClaimCanteenView,
     UndoClaimCanteenView,
+    JoinCanteenView,
+    UndoJoinCanteenView,
     SatelliteListCreateView,
     UnlinkSatelliteView,
     ActionableCanteensListView,

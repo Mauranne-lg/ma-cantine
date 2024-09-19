@@ -977,6 +977,36 @@ class ClaimCanteenView(APIView):
         return JsonResponse(camelize(MinimalCanteenSerializer(canteen).data), status=status.HTTP_200_OK)
 
 
+class JoinCanteenView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    @transaction.atomic
+    def post(self, request, canteen_pk):
+        try:
+            canteen = Canteen.objects.get(pk=canteen_pk)
+        except Canteen.DoesNotExist:
+            raise BadRequest()
+
+        canteen.clients.add(self.request.user)
+        canteen.save()
+        return JsonResponse(camelize(MinimalCanteenSerializer(canteen).data), status=status.HTTP_200_OK)
+
+
+class UndoJoinCanteenView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    @transaction.atomic
+    def post(self, request, canteen_pk):
+        try:
+            canteen = Canteen.objects.get(pk=canteen_pk)
+        except Canteen.DoesNotExist:
+            raise BadRequest()
+
+        canteen.clients.remove(self.request.user)
+        canteen.save()
+        return JsonResponse({}, status=status.HTTP_200_OK)
+
+
 class UndoClaimCanteenView(APIView):
     permission_classes = [IsAuthenticated]
 

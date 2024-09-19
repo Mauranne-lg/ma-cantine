@@ -45,6 +45,22 @@
           </v-col>
         </v-row>
       </v-card>
+      <v-btn v-if="!joinSucceeded" se color="primary" @click="joinCanteen">
+        Rejoindre cette cantine en tant que client
+      </v-btn>
+      <div v-else>
+        <v-alert colored-border color="primary" elevation="2" border="left" type="success">
+          <p>
+            Vous êtes maintenant client de cet établissement
+          </p>
+          <p class="mb-0">
+            S'agit-il d'une erreur ?
+            <v-btn @click="undoJoinCanteen" outlined color="primary" class="ml-2">
+              Je ne suis pas client de cet établissement
+            </v-btn>
+          </p>
+        </v-alert>
+      </div>
 
       <div v-if="showClaimCanteen">
         <v-alert colored-border color="primary" elevation="2" border="left" type="success" v-if="undoSucceeded">
@@ -110,6 +126,8 @@ export default {
       canteensHomeBacklink: { name: "CanteensHome" },
       claimSucceeded: false,
       undoSucceeded: false,
+      joinSucceeded: false,
+      undoJoinSucceeded: false,
       showCopySuccessMessage: false,
     }
   },
@@ -170,6 +188,26 @@ export default {
             status: "error",
           })
         })
+    },
+    joinCanteen() {
+      return this.$store
+        .dispatch("joinCanteen", { canteenId: this.canteen.id })
+        .then(() => {
+          this.joinSucceeded = true
+        })
+        .catch((e) => this.$store.dispatch("notifyServerError", e))
+    },
+    undoJoinCanteen() {
+      return this.$store
+        .dispatch("undoJoinCanteen", { canteenId: this.canteen.id })
+        .then(() => {
+          this.joinSucceeded = false
+          this.$store.dispatch("notify", {
+            title: "Vous n'êtes plus client de cet établissement",
+            status: "success",
+          })
+        })
+        .catch((e) => this.$store.dispatch("notifyServerError", e))
     },
     loadCanteen() {
       const previousIdVersion = this.canteenUrlComponent.indexOf("--") === -1

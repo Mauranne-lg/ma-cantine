@@ -167,6 +167,12 @@ class Canteen(SoftDeletionModel):
         related_name="canteens",
         verbose_name="gestionnaires",
     )
+    clients = models.ManyToManyField(
+        get_user_model(),
+        blank=True,
+        related_name="joined_canteens",
+        verbose_name="clients",
+    )
     claimed_by = models.ForeignKey(
         get_user_model(),
         blank=True,

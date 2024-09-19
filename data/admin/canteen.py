@@ -75,6 +75,7 @@ class CanteenAdmin(SoftDeletionHistoryAdmin):
         "sectors",
         "line_ministry",
         "managers",
+        "clients",
         "claimed_by",
         "has_been_claimed",
         "management_type",
