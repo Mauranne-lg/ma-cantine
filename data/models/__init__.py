@@ -20,3 +20,4 @@ from .videotutorial import VideoTutorial  # noqa: F401
 from .importtype import ImportType  # noqa: F401
 from .importfailure import ImportFailure  # noqa: F401
 from .wasteaction import WasteAction  # noqa: F401
+from .recipe import Ingredient, Recipe  # noqa: F401
