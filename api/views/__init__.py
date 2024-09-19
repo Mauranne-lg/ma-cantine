@@ -79,3 +79,4 @@ from .partner import PartnersView, PartnerView  # noqa: F401
 from .videotutorial import VideoTutorialListView  # noqa: F401
 from .initial import InitialDataView  # noqa: F401
 from .wasteaction import WasteActionsView, WasteActionView  # noqa: F401
+from .recipe import RecipeListView

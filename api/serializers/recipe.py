@@ -1,0 +1,31 @@
+from data.models import Recipe, Ingredient
+from rest_framework import serializers
+
+
+class IngredientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ingredient
+        read_only_fields = (
+            "name",
+        )
+        fields = (
+            "name",
+        )
+
+class RecipeSerializer(serializers.ModelSerializer):
+    ingredients = IngredientSerializer(many=True)
+    
+    class Meta:
+        model = Recipe
+        read_only_fields = (
+            "name",
+            "cooking_time",
+            "instructions",
+            "ingredients",
+        )
+        fields = (
+            "name",
+            "cooking_time",
+            "instructions",
+            "ingredients",
+        )
