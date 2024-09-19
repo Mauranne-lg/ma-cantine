@@ -239,6 +239,10 @@ export default {
               to: { name: "GeneratePosterPage" },
             },
             {
+              text: "Voir des recettes",
+              to: { name: "RecipePage" },
+            },
+            {
               text: "Webinaires",
               to: { name: "CommunityPage" },
             },
