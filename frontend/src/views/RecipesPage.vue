@@ -17,20 +17,21 @@
       <v-card
         class="dsfr d-flex flex-column align-center justify-center ma-2"
         outlined
-        min-height="300"
-        min-width="300"
+        min-height="500"
+        min-width="400"
         height="80%"
         v-for="recipe in recipes"
         :key="recipe.name"
       >
         <h1 class="font-weight-bold text-center primary--text">{{ recipe.name }}</h1>
-        <p>Temps de cuisson : {{ recipe.cookingTime }}</p>
-        <ul class="pb-4">
-          <p class="my-2 font-weight-bold">Ingrédients</p>
-          <li class="pb-4" v-for="ingredient in recipe.ingredients" :key="ingredient.name">{{ ingredient.name }}</li>
+        <p class="font-weight-bold">Temps de cuisson : {{ recipe.cookingTime }}</p>
+        <h2 class="font-weight-bold">Ingrédients</h2>
+        <ul class="my-2">
+          <li v-for="ingredient in recipe.ingredients" :key="ingredient.name">{{ ingredient.name }}</li>
         </ul>
-        <p class="my-2 font-weight-bold">Instructions</p>
-        <p>{{ recipe.instructions }}</p>
+        <h2 class="my-2 font-weight-bold">Instructions</h2>
+        <p v-html="recipe.instructions"></p>
+        <div v-if="recipe.surveyLink"><a :href="recipe.surveyLink" target="_blank">Donner mon avis</a></div>
       </v-card>
     </v-col>
   </v-row>
@@ -38,7 +39,7 @@
 
 <script>
 export default {
-  name: "RecipePage",
+  name: "RecipesPage",
   data() {
     return {
       loading: false,

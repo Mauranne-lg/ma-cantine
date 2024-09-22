@@ -240,7 +240,7 @@ export default {
             },
             {
               text: "Voir des recettes",
-              to: { name: "RecipePage" },
+              to: { name: "RecipesPage" },
             },
             {
               text: "Webinaires",

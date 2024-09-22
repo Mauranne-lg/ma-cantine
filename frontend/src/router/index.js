@@ -60,7 +60,7 @@ import TerritoryCanteens from "@/views/TerritoryCanteens"
 import VideoTutorial from "@/views/VideoTutorial"
 import MyProgress from "@/views/MyProgress"
 import Constants from "@/constants"
-import RecipePage from "@/views/RecipePage"
+import RecipesPage from "@/views/RecipesPage"
 
 Vue.use(VueRouter)
 
@@ -187,8 +187,8 @@ const routes = [
   },
   {
     path: "/recettes",
-    name: "RecipePage",
-    component: RecipePage,
+    name: "RecipesPage",
+    component: RecipesPage,
     meta: {
       title: "Trouver une recette",
     },

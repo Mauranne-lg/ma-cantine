@@ -22,10 +22,12 @@ class RecipeSerializer(serializers.ModelSerializer):
             "cooking_time",
             "instructions",
             "ingredients",
+            "survey_link"
         )
         fields = (
             "name",
             "cooking_time",
             "instructions",
             "ingredients",
+            "survey_link"
         )

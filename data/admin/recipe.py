@@ -19,11 +19,13 @@ class RecipeAdmin(admin.ModelAdmin):
         "name",
         "cooking_time",
         "instructions",
-        "ingredients"
+        "ingredients",
+        "survey_link"
     )
     list_display = (
         "name",
         "cooking_time",
-        "instructions"
+        "instructions",
+        "survey_link"
     )
     

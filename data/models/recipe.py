@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 class Ingredient(models.Model):
@@ -18,7 +19,11 @@ class Recipe(models.Model):
         verbose_name_plural = "recettes"
 
     name = models.CharField(max_length=100, verbose_name="titre")
-    instructions = models.TextField(verbose_name="instructions")
+    instructions = RichTextField(
+        verbose_name="Instructions",
+        default="<ul><li>Etape 1 : </li><li>Etape 2 : </li></ul><p>Bon appétit !</p>",
+    )
     cooking_time = models.DurationField(verbose_name="temps de cuisson")
     ingredients = models.ManyToManyField(Ingredient, verbose_name="ingrédients")
+    survey_link = models.URLField(null=True, blank=True)
 
