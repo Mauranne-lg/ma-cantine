@@ -112,8 +112,8 @@ INSTALLED_APPS = WAGTAIL_INSTALLED_APPS + [
     "drf_spectacular",
     "drf_spectacular_sidecar",
     "simple_history",
-    'djf_surveys',
-    'tinymce',  # djf_surveys dependency
+    "djf_surveys",
+    "tinymce",  # djf_surveys dependency
 ]
 
 MIDDLEWARE = [
@@ -145,7 +145,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                'djf_surveys.context_processors.surveys_context'
+                "djf_surveys.context_processors.surveys_context",
             ],
         },
     },

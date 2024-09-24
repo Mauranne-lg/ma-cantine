@@ -16,7 +16,7 @@ from api.views import (
     ImportSimpleCentralKitchenView,
     ImportCompleteCentralKitchenView,
     TerritoryCanteensListView,
-    RecipeListView
+    RecipeListView,
 )
 from api.views import UpdateUserView, UserCanteensView, CanteenStatisticsView
 from api.views import (
@@ -37,7 +37,15 @@ from api.views import UserCanteenPreviews, UserCanteenSummaries, CanteenLocation
 from api.views import PartnerView, PartnersView, PartnerTypeListView
 from api.views import ReservationExpeView, PurchaseListExportView, PurchaseOptionsView, ImportPurchasesView
 from api.views import MessageCreateView, VegetarianExpeView, TeamJoinRequestView
-from api.views import ReviewView, CommunityEventsView, ClaimCanteenView, UndoClaimCanteenView, JoinCanteenView, UndoJoinCanteenView, SatelliteListCreateView
+from api.views import (
+    ReviewView,
+    CommunityEventsView,
+    ClaimCanteenView,
+    UndoClaimCanteenView,
+    JoinCanteenView,
+    UndoJoinCanteenView,
+    SatelliteListCreateView,
+)
 from api.views import ActionableCanteensListView, ActionableCanteenRetrieveView
 from api.views import CanteenStatusView, VideoTutorialListView, DiagnosticsToTeledeclareListView
 from api.views import InitialDataView, UnlinkSatelliteView

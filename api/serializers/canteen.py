@@ -139,7 +139,7 @@ class PublicCanteenPreviewSerializer(serializers.ModelSerializer):
 
 class CanteenSurveySerializer(serializers.ModelSerializer):
     url = serializers.SerializerMethodField()
-    
+
     class Meta:
         model = CanteenSurvey
         fields = (
@@ -198,7 +198,7 @@ class PublicCanteenSerializer(serializers.ModelSerializer):
             "is_user_client",
             "central_kitchen",
             "badges",
-            "surveys"
+            "surveys",
         )
 
     def get_is_managed_by_user(self, obj):

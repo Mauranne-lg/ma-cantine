@@ -172,11 +172,6 @@ class CanteenInline(admin.TabularInline):
 class CanteenSurveyAdmin(admin.ModelAdmin):
     class Meta:
         model = CanteenSurvey
-        fields = (
-            "survey_link",
-            "canteen"
-        )
+        fields = ("survey_link", "canteen")
 
-    list_filter = (
-        "canteen",
-    )
+    list_filter = ("canteen",)

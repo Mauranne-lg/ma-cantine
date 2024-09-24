@@ -487,13 +487,14 @@ class CanteenImage(models.Model):
 
 from djf_surveys.models import Survey
 
+
 class CanteenSurvey(Survey):
     canteen = models.ForeignKey(Canteen, on_delete=models.CASCADE, related_name="surveys")
-    
+
     class Meta:
         verbose_name = "Sondage lié à une cantine"
         verbose_name_plural = "Sondages liés aux cantines"
-        ordering = ['canteen']
+        ordering = ["canteen"]
 
     def __str__(self):
         return self.name
