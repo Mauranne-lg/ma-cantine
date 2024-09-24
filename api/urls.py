@@ -1,22 +1,63 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
+
 from api.views import (
+    ActionableCanteenRetrieveView,
+    ActionableCanteensListView,
+    AddManagerView,
+    BlogPostsView,
+    BlogPostView,
+    CanteenLocationsView,
+    CanteenPurchasesPercentageSummaryView,
+    CanteenPurchasesSummaryView,
+    CanteenStatisticsView,
+    CanteenStatusView,
+    CanteenWasteMeasurementsView,
+    CanteenWasteMeasurementView,
+    ChangePasswordView,
+    ClaimCanteenView,
+    CommunityEventsView,
+    DiagnosticCreateView,
+    DiagnosticsFromPurchasesView,
+    DiagnosticsToTeledeclareListView,
+    DiagnosticUpdateView,
+    EmailDiagnosticImportFileView,
+    ImportCompleteCentralKitchenView,
+    ImportCompleteDiagnosticsView,
+    ImportPurchasesView,
+    ImportSimpleCentralKitchenView,
+    ImportSimpleDiagnosticsView,
+    InitialDataView,
     InquiryView,
     LoggedUserView,
-    UserInfoView,
-    SubscribeNewsletter,
+    MessageCreateView,
+    PartnersView,
+    PartnerTypeListView,
+    PartnerView,
+    PublicCanteenPreviewView,
+    PublishCanteenView,
+    PublishedCanteenSingleView,
+    PublishedCanteensView,
+    PublishManyCanteensView,
     PurchaseListCreateView,
+    PurchaseListExportView,
+    PurchaseOptionsView,
     PurchaseRetrieveUpdateDestroyView,
     PurchasesDeleteView,
     PurchasesRestoreView,
-    CanteenPurchasesSummaryView,
-    CanteenPurchasesPercentageSummaryView,
-    DiagnosticsFromPurchasesView,
-    UsernameSuggestionView,
-    ImportSimpleCentralKitchenView,
-    ImportCompleteCentralKitchenView,
+    RemoveManagerView,
+    ReservationExpeView,
+    RetrieveUpdateUserCanteenView,
+    ReviewView,
+    SatelliteListCreateView,
+    SectorListView,
+    SendCanteenNotFoundEmail,
+    SubscribeNewsletter,
+    TeamJoinRequestView,
+    TeledeclarationCancelView,
+    TeledeclarationCreateView,
+    TeledeclarationPdfView,
     TerritoryCanteensListView,
-    RecipeListView,
 )
 from api.views import UpdateUserView, UserCanteensView, CanteenStatisticsView
 from api.views import (
@@ -50,7 +91,7 @@ from api.views import ActionableCanteensListView, ActionableCanteenRetrieveView
 from api.views import CanteenStatusView, VideoTutorialListView, DiagnosticsToTeledeclareListView
 from api.views import InitialDataView, UnlinkSatelliteView
 from api.views import WasteActionsView, WasteActionView
-
+from api.views import RecipeListView
 
 urlpatterns = {
     path("loggedUser/", LoggedUserView.as_view(), name="logged_user"),

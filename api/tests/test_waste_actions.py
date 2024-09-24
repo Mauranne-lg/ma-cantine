@@ -1,5 +1,6 @@
-from rest_framework.test import APITestCase
 from django.urls import reverse
+from rest_framework.test import APITestCase
+
 from data.factories import WasteActionFactory
 from data.models import WasteAction
 
@@ -40,5 +41,17 @@ class TestWasteActionsFiltersApi(APITestCase):
         response = self.client.get(
             f"{reverse('waste_actions_list')}?waste_origins={WasteAction.WasteOrigin.PREP}&waste_origins={WasteAction.WasteOrigin.UNSERVED}"
         )
+        results = response.data["results"]
+        self.assertEqual(len(results), 2)
+
+    def test_text_search(self):
+        """
+        A text search is carried out on title and subtitle, ignoring casing and accents
+        """
+        WasteActionFactory.create(title="Évaluation de travail", subtitle="Du texte")
+        WasteActionFactory.create(title="Du texte", subtitle="Faire une évaluation")
+        WasteActionFactory.create(title="Autre texte", subtitle="Ne m'évalue pas")
+
+        response = self.client.get(f"{reverse('waste_actions_list')}?search=evaluation")
         results = response.data["results"]
         self.assertEqual(len(results), 2)

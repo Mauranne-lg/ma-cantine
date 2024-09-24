@@ -1,8 +1,11 @@
+from django_filters import rest_framework as django_filters
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.pagination import LimitOffsetPagination
-from data.models import WasteAction
+
 from api.serializers import WasteActionSerializer
-from django_filters import rest_framework as django_filters
+from data.models import WasteAction
+
+from .utils import UnaccentSearchFilter
 
 
 class WasteActionPagination(LimitOffsetPagination):
@@ -26,8 +29,10 @@ class WasteActionsView(ListAPIView):
     pagination_class = WasteActionPagination
     filter_backends = [
         django_filters.DjangoFilterBackend,
+        UnaccentSearchFilter,
     ]
     filterset_class = WasteActionFilterSet
+    search_fields = ["title", "subtitle"]
 
 
 class WasteActionView(RetrieveAPIView):

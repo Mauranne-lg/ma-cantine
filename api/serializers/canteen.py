@@ -1,17 +1,16 @@
 import logging
-from rest_framework import serializers
-from drf_base64.fields import Base64ImageField
-from data.models import Canteen, Sector, CanteenImage, Diagnostic
-from django.conf import settings
 
-from data.models.canteen import CanteenSurvey
+from django.conf import settings
+from drf_base64.fields import Base64ImageField
+from rest_framework import serializers
+
+from data.models import Canteen, CanteenImage, Diagnostic, Sector, CanteenSurvey
 from .diagnostic import PublicDiagnosticSerializer, FullDiagnosticSerializer, CentralKitchenDiagnosticSerializer
 from .diagnostic import ApproDiagnosticSerializer
 from .diagnostic import PublicApproDiagnosticSerializer, PublicServiceDiagnosticSerializer
 from .sector import SectorSerializer
 from .user import CanteenManagerSerializer
 from .managerinvitation import ManagerInvitationSerializer
-
 
 logger = logging.getLogger(__name__)
 
