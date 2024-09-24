@@ -4,7 +4,7 @@ from django.conf import settings
 from drf_base64.fields import Base64ImageField
 from rest_framework import serializers
 
-from data.models import Canteen, CanteenImage, Diagnostic, Sector
+from data.models import Canteen, CanteenImage, CanteenSurvey, Diagnostic, Sector
 
 from .diagnostic import (
     ApproDiagnosticSerializer,
@@ -142,7 +142,32 @@ class PublicCanteenPreviewSerializer(serializers.ModelSerializer):
         )
 
 
+class CanteenSurveySerializer(serializers.ModelSerializer):
+    share_url = serializers.SerializerMethodField(read_only=True)
+    create_url = serializers.SerializerMethodField(read_only=True)
+    description = serializers.CharField(required=False)
+    name = serializers.CharField(required=False)
+    canteen = serializers.CharField(required=False)
+
+    class Meta:
+        model = CanteenSurvey
+        fields = (
+            "name",
+            "description",
+            "canteen",
+            "create_url",
+            "share_url",
+        )
+
+    def get_create_url(self, obj):
+        return settings.SURVEY_CREATE_BASE_URL + obj.slug
+
+    def get_share_url(self, obj):
+        return settings.SURVEY_SHARE_BASE_URL + obj.slug
+
+
 class PublicCanteenSerializer(serializers.ModelSerializer):
+    surveys = CanteenSurveySerializer(many=True, read_only=True)
     sectors = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     appro_diagnostics = PublicApproDiagnosticSerializer(
         many=True, read_only=True, source="published_appro_diagnostics"
@@ -155,6 +180,7 @@ class PublicCanteenSerializer(serializers.ModelSerializer):
     images = MediaListSerializer(child=CanteenImageSerializer(), read_only=True)
     is_managed_by_user = serializers.SerializerMethodField(read_only=True)
     badges = BadgesSerializer(read_only=True, source="*")
+    is_user_client = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Canteen
@@ -183,13 +209,19 @@ class PublicCanteenSerializer(serializers.ModelSerializer):
             "information_comments",
             "can_be_claimed",
             "is_managed_by_user",
+            "is_user_client",
             "central_kitchen",
             "badges",
+            "surveys",
         )
 
     def get_is_managed_by_user(self, obj):
         user = self.context["request"].user
         return user in obj.managers.all()
+
+    def get_is_user_client(self, obj):
+        user = self.context["request"].user
+        return user in obj.clients.all()
 
 
 class ElectedCanteenSerializer(serializers.ModelSerializer, PublicationStatusMixin):

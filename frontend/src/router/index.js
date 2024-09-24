@@ -59,6 +59,7 @@ import TerritoryCanteens from "@/views/TerritoryCanteens"
 import VideoTutorial from "@/views/VideoTutorial"
 import MyProgress from "@/views/MyProgress"
 import Constants from "@/constants"
+import RecipesPage from "@/views/RecipesPage"
 
 Vue.use(VueRouter)
 
@@ -180,6 +181,15 @@ const routes = [
     component: CanteenSearchLanding,
     meta: {
       title: "Trouver une cantine",
+    },
+    sitemapGroup: Constants.SitemapGroups.ACTION,
+  },
+  {
+    path: "/recettes",
+    name: "RecipesPage",
+    component: RecipesPage,
+    meta: {
+      title: "Trouver une recette",
     },
     sitemapGroup: Constants.SitemapGroups.ACTION,
   },

@@ -15,6 +15,7 @@ from .canteen import (  # noqa: F401
     ElectedCanteenSerializer,
     MinimalCanteenSerializer,
     CanteenSummarySerializer,
+    CanteenSurveySerializer,
 )
 from .diagnostic import (  # noqa: F401
     ManagerDiagnosticSerializer,
@@ -52,3 +53,4 @@ from .communityevent import CommunityEventSerializer  # noqa: F401
 from .partner import PartnerSerializer, PartnerShortSerializer, PartnerContactSerializer  # noqa: F401
 from .videotutorial import VideoTutorialSerializer  # noqa: F401
 from .wasteaction import WasteActionSerializer  # noqa: F401
+from .recipe import RecipeSerializer, IngredientSerializer  # noqa: F401

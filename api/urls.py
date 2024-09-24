@@ -12,6 +12,7 @@ from api.views import (
     CanteenPurchasesSummaryView,
     CanteenStatisticsView,
     CanteenStatusView,
+    CanteenSurveyCreateView,
     CanteenWasteMeasurementsView,
     CanteenWasteMeasurementView,
     ChangePasswordView,
@@ -29,6 +30,7 @@ from api.views import (
     ImportSimpleDiagnosticsView,
     InitialDataView,
     InquiryView,
+    JoinCanteenView,
     LoggedUserView,
     MessageCreateView,
     PartnersView,
@@ -45,6 +47,7 @@ from api.views import (
     PurchaseRetrieveUpdateDestroyView,
     PurchasesDeleteView,
     PurchasesRestoreView,
+    RecipeListView,
     RemoveManagerView,
     ReservationExpeView,
     RetrieveUpdateUserCanteenView,
@@ -59,6 +62,7 @@ from api.views import (
     TeledeclarationPdfView,
     TerritoryCanteensListView,
     UndoClaimCanteenView,
+    UndoJoinCanteenView,
     UnlinkSatelliteView,
     UnpublishCanteenView,
     UpdateUserView,
@@ -238,6 +242,9 @@ urlpatterns = {
     path("communityEvents/", CommunityEventsView.as_view(), name="community_event_list"),
     path("canteens/<int:canteen_pk>/claim/", ClaimCanteenView.as_view(), name="claim_canteen"),
     path("canteens/<int:canteen_pk>/undoClaim/", UndoClaimCanteenView.as_view(), name="undo_claim_canteen"),
+    path("canteens/<int:canteen_pk>/join/", JoinCanteenView.as_view(), name="undo_claim_canteen"),
+    path("canteens/<int:canteen_pk>/undoJoin/", UndoJoinCanteenView.as_view(), name="undo_join_canteen"),
+    path("canteens/<int:canteen_pk>/createSurvey/", CanteenSurveyCreateView.as_view(), name="create_survey"),
     path("actionableCanteens/<int:year>", ActionableCanteensListView.as_view(), name="list_actionable_canteens"),
     path(
         "actionableCanteens/<int:pk>/<int:year>",
@@ -255,6 +262,7 @@ urlpatterns = {
     path("territoryCanteens/", TerritoryCanteensListView.as_view(), name="territory_canteens"),
     path("wasteActions/", WasteActionsView.as_view(), name="waste_actions_list"),
     path("wasteActions/<int:pk>", WasteActionView.as_view(), name="waste_action_detail"),
+    path("recipes/", RecipeListView.as_view(), name="recipes"),
 }
 
 urlpatterns = format_suffix_patterns(urlpatterns)

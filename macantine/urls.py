@@ -19,6 +19,7 @@ urlpatterns = [
     path("cms/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("pages/", include(wagtail_urls)),
+    path("surveys/", include("djf_surveys.urls")),
 ]
 urlpatterns.append(re_path(r"", include("web.urls")))
 urlpatterns.append(re_path(r"^api/v1/", include("api.urls")))

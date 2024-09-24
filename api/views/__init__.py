@@ -7,7 +7,9 @@ from .canteen import (  # noqa: F401
     CanteenMinistriesView,
     CanteenStatisticsView,
     CanteenStatusView,
+    CanteenSurveyCreateView,
     ClaimCanteenView,
+    JoinCanteenView,
     PublicCanteenPreviewView,
     PublishCanteenView,
     PublishedCanteenSingleView,
@@ -20,6 +22,7 @@ from .canteen import (  # noqa: F401
     TeamJoinRequestView,
     TerritoryCanteensListView,
     UndoClaimCanteenView,
+    UndoJoinCanteenView,
     UnlinkSatelliteView,
     UnpublishCanteenView,
     UserCanteenPreviews,
@@ -56,6 +59,7 @@ from .purchase import (  # noqa: F401
     PurchasesRestoreView,
 )
 from .purchaseimport import ImportPurchasesView  # noqa: F401
+from .recipe import RecipeListView  # noqa: F401
 from .reservationexpe import ReservationExpeView  # noqa: F401
 from .review import ReviewView  # noqa: F401
 from .sector import SectorListView  # noqa: F401

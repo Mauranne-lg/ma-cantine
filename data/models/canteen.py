@@ -178,6 +178,12 @@ class Canteen(SoftDeletionModel):
         related_name="canteens",
         verbose_name="gestionnaires",
     )
+    clients = models.ManyToManyField(
+        get_user_model(),
+        blank=True,
+        related_name="joined_canteens",
+        verbose_name="clients",
+    )
     claimed_by = models.ForeignKey(
         get_user_model(),
         blank=True,
@@ -488,3 +494,18 @@ class CanteenImage(models.Model):
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         self.image = optimize_image(self.image, self.image.name)
         super(CanteenImage, self).save(force_insert, force_update, using, update_fields)
+
+
+from djf_surveys.models import Survey
+
+
+class CanteenSurvey(Survey):
+    canteen = models.ForeignKey(Canteen, on_delete=models.CASCADE, related_name="surveys")
+
+    class Meta:
+        verbose_name = "Sondage lié à une cantine"
+        verbose_name_plural = "Sondages liés aux cantines"
+        ordering = ["canteen"]
+
+    def __str__(self):
+        return self.name

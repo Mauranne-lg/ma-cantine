@@ -33,6 +33,7 @@ from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework import status
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import (
+    CreateAPIView,
     ListAPIView,
     ListCreateAPIView,
     RetrieveAPIView,
@@ -55,6 +56,7 @@ from api.serializers import (
     CanteenPreviewSerializer,
     CanteenStatusSerializer,
     CanteenSummarySerializer,
+    CanteenSurveySerializer,
     ElectedCanteenSerializer,
     FullCanteenSerializer,
     ManagingTeamSerializer,
@@ -74,6 +76,7 @@ from data.models import (
     Sector,
     Teledeclaration,
 )
+from data.models.canteen import CanteenSurvey
 from data.region_choices import Region
 from macantine.utils import (
     fetch_geo_data_from_api_entreprise_by_siret,
@@ -1008,6 +1011,36 @@ class ClaimCanteenView(APIView):
         return JsonResponse(camelize(MinimalCanteenSerializer(canteen).data), status=status.HTTP_200_OK)
 
 
+class JoinCanteenView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    @transaction.atomic
+    def post(self, request, canteen_pk):
+        try:
+            canteen = Canteen.objects.get(pk=canteen_pk)
+        except Canteen.DoesNotExist:
+            raise BadRequest()
+
+        canteen.clients.add(self.request.user)
+        canteen.save()
+        return JsonResponse(camelize(MinimalCanteenSerializer(canteen).data), status=status.HTTP_200_OK)
+
+
+class UndoJoinCanteenView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    @transaction.atomic
+    def post(self, request, canteen_pk):
+        try:
+            canteen = Canteen.objects.get(pk=canteen_pk)
+        except Canteen.DoesNotExist:
+            raise BadRequest()
+
+        canteen.clients.remove(self.request.user)
+        canteen.save()
+        return JsonResponse({}, status=status.HTTP_200_OK)
+
+
 class UndoClaimCanteenView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -1330,3 +1363,13 @@ class CanteenMinistriesView(APIView):
                 }
             )
         return Response(ministries)
+
+
+class CanteenSurveyCreateView(CreateAPIView):
+    model = CanteenSurvey
+    permission_classes = [IsCanteenManagerUrlParam]
+    serializer_class = CanteenSurveySerializer
+
+    def perform_create(self, serializer):
+        canteen = self.kwargs.get("canteen_pk")
+        serializer.save(canteen_id=canteen, name="Sondage Cantine", description="Description du sondage")

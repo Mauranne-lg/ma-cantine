@@ -48,6 +48,7 @@ class User(AbstractUser):
         MANY_ESTABLISHMENTS_MANAGER = "MANY_ESTABLISHMENTS_MANAGER", "Responsable de plusieurs établissements (SRC)"
         TECHNICAL = "TECHNICAL", "Développement logiciel, analyse de données ou autre rôle technique"
         OTHER = "OTHER", "Autre"
+        CLIENT = "CLIENT", "Client"
 
     class Sources(models.TextChoices):
         WEBINAIRE = "WEBINAIRE", "Webinaire"

@@ -378,6 +378,10 @@ export default Object.freeze({
       value: "TECHNICAL",
     },
     {
+      text: "Client",
+      value: "CLIENT",
+    },
+    {
       text: "Autre (spécifiez)",
       value: "OTHER",
     },

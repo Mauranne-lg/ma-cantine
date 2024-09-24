@@ -113,6 +113,8 @@ INSTALLED_APPS = WAGTAIL_INSTALLED_APPS + [
     "drf_spectacular",
     "drf_spectacular_sidecar",
     "simple_history",
+    "djf_surveys",
+    "tinymce",  # djf_surveys dependency
 ]
 
 MIDDLEWARE = [
@@ -144,6 +146,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "djf_surveys.context_processors.surveys_context",
             ],
         },
     },
@@ -576,3 +579,8 @@ MAX_DAYS_HISTORICAL_RECORDS = (
 WAGTAIL_SITE_NAME = "ma-cantine"
 # WAGTAILADMIN_BASE_URL # Declare if null URL in notification emails
 WAGTAILDOCS_EXTENSIONS = ["csv", "docx", "key", "odt", "pdf", "pptx", "rtf", "txt", "xlsx", "zip"]
+
+# Django-form-surveys
+SURVEY_LINK_BACK_ON_SUCCESS_PAGE = "http://127.0.0.1:8000/"
+SURVEY_SHARE_BASE_URL = "http://127.0.0.1:8000/surveys/share/"
+SURVEY_CREATE_BASE_URL = "http://127.0.0.1:8000/surveys/dashboard/forms/"

@@ -45,6 +45,31 @@
           </v-col>
         </v-row>
       </v-card>
+      <div v-if="isCanteenClient && !undoJoinSucceeded">
+        <h2 class="mt-12 mb-8">Sondages en cours</h2>
+        <template v-if="canteen.surveys.length === 0"><p>Aucun sondage en cours</p></template>
+        <template v-else>
+          <p v-for="survey in canteen.surveys" :key="survey.name" class="my-4">
+            <a :href="survey.shareUrl" target="_blank">
+              {{ survey.name }}
+            </a>
+          </p>
+        </template>
+        <v-alert colored-border color="primary" elevation="2" border="left" type="success">
+          <p>
+            Vous êtes client de cet établissement
+          </p>
+          <p class="mb-0">
+            S'agit-il d'une erreur ?
+            <v-btn @click="undoJoinCanteen" outlined color="primary" class="ml-2">
+              Je ne suis pas client de cet établissement
+            </v-btn>
+          </p>
+        </v-alert>
+      </div>
+      <v-btn v-else class="my-2" color="primary" @click="joinCanteen">
+        Rejoindre cette cantine en tant que client
+      </v-btn>
 
       <div v-if="showClaimCanteen">
         <v-alert colored-border color="primary" elevation="2" border="left" type="success" v-if="undoSucceeded">
@@ -110,6 +135,8 @@ export default {
       canteensHomeBacklink: { name: "CanteensHome" },
       claimSucceeded: false,
       undoSucceeded: false,
+      joinSucceeded: false,
+      undoJoinSucceeded: false,
       showCopySuccessMessage: false,
     }
   },
@@ -140,6 +167,9 @@ export default {
     isCanteenManager() {
       return this.canteen.isManagedByUser
     },
+    isCanteenClient() {
+      return this.canteen.isUserClient || this.joinSucceeded
+    },
     imageLimit() {
       return this.$vuetify.breakpoint.xs ? 0 : 3
     },
@@ -169,6 +199,32 @@ export default {
               "Une erreur est survenue, vous pouvez réessayer plus tard ou nous contacter directement à support-egalim@beta.gouv.fr",
             status: "error",
           })
+        })
+    },
+    joinCanteen() {
+      return this.$store
+        .dispatch("joinCanteen", { canteenId: this.canteen.id })
+        .then(() => {
+          this.joinSucceeded = true
+          this.undoJoinSucceeded = false
+        })
+        .catch((e) => {
+          this.$store.dispatch("notifyServerError", e)
+        })
+    },
+    undoJoinCanteen() {
+      return this.$store
+        .dispatch("undoJoinCanteen", { canteenId: this.canteen.id })
+        .then(() => {
+          this.undoJoinSucceeded = true
+          this.joinSucceeded = false
+          this.$store.dispatch("notify", {
+            title: "Vous n'êtes plus client de cet établissement",
+            status: "success",
+          })
+        })
+        .catch((e) => {
+          this.$store.dispatch("notifyServerError", e)
         })
     },
     loadCanteen() {
