@@ -2,7 +2,7 @@ from django import forms
 from django.conf import settings
 from django.contrib import admin
 from django.utils import timezone
-from data.models import Canteen, Teledeclaration
+from data.models import Canteen, Teledeclaration, CanteenSurvey
 from .diagnostic import DiagnosticInline
 from .softdeletionadmin import SoftDeletionHistoryAdmin, SoftDeletionStatusFilter
 
@@ -166,3 +166,17 @@ class CanteenInline(admin.TabularInline):
 
     def active(self, obj):
         return "🗑️ Supprimée par l'utilisateur" if obj.canteen.deletion_date else "✔️"
+
+
+@admin.register(CanteenSurvey)
+class CanteenSurveyAdmin(admin.ModelAdmin):
+    class Meta:
+        model = CanteenSurvey
+        fields = (
+            "survey_link",
+            "canteen"
+        )
+
+    list_filter = (
+        "canteen",
+    )
