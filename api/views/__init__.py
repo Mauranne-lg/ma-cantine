@@ -58,10 +58,9 @@ from .purchase import (  # noqa: F401
     PurchasesRestoreView,
 )
 from .purchaseimport import ImportPurchasesView  # noqa: F401
-from .recipe import RecipeListView # noqa: F401
+from .recipe import RecipeListView  # noqa: F401
 from .reservationexpe import ReservationExpeView  # noqa: F401
 from .review import ReviewView  # noqa: F401
-UndoCl
 from .sector import SectorListView  # noqa: F401
 from .subscription import SubscribeNewsletter  # noqa: F401
 from .teledeclaration import (  # noqa: F401

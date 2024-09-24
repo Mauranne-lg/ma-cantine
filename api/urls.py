@@ -29,6 +29,7 @@ from api.views import (
     ImportSimpleDiagnosticsView,
     InitialDataView,
     InquiryView,
+    JoinCanteenView,
     LoggedUserView,
     MessageCreateView,
     PartnersView,
@@ -45,6 +46,7 @@ from api.views import (
     PurchaseRetrieveUpdateDestroyView,
     PurchasesDeleteView,
     PurchasesRestoreView,
+    RecipeListView,
     RemoveManagerView,
     ReservationExpeView,
     RetrieveUpdateUserCanteenView,
@@ -58,40 +60,21 @@ from api.views import (
     TeledeclarationCreateView,
     TeledeclarationPdfView,
     TerritoryCanteensListView,
-)
-from api.views import UpdateUserView, UserCanteensView, CanteenStatisticsView
-from api.views import (
-    PublishedCanteensView,
-    PublicCanteenPreviewView,
-    PublishManyCanteensView,
-    PublishedCanteenSingleView,
-)
-from api.views import DiagnosticCreateView, RetrieveUpdateUserCanteenView, DiagnosticUpdateView
-from api.views import CanteenWasteMeasurementsView, CanteenWasteMeasurementView
-from api.views import EmailDiagnosticImportFileView
-from api.views import BlogPostsView, SectorListView, ChangePasswordView, BlogPostView
-from api.views import AddManagerView, RemoveManagerView
-from api.views import ImportSimpleDiagnosticsView, ImportCompleteDiagnosticsView
-from api.views import TeledeclarationCreateView, TeledeclarationCancelView, TeledeclarationPdfView
-from api.views import PublishCanteenView, UnpublishCanteenView, SendCanteenNotFoundEmail
-from api.views import UserCanteenPreviews, UserCanteenSummaries, CanteenLocationsView
-from api.views import PartnerView, PartnersView, PartnerTypeListView
-from api.views import ReservationExpeView, PurchaseListExportView, PurchaseOptionsView, ImportPurchasesView
-from api.views import MessageCreateView, VegetarianExpeView, TeamJoinRequestView
-from api.views import (
-    ReviewView,
-    CommunityEventsView,
-    ClaimCanteenView,
     UndoClaimCanteenView,
-    JoinCanteenView,
     UndoJoinCanteenView,
-    SatelliteListCreateView,
+    UnlinkSatelliteView,
+    UnpublishCanteenView,
+    UpdateUserView,
+    UserCanteenPreviews,
+    UserCanteenSummaries,
+    UserCanteensView,
+    UserInfoView,
+    UsernameSuggestionView,
+    VegetarianExpeView,
+    VideoTutorialListView,
+    WasteActionsView,
+    WasteActionView,
 )
-from api.views import ActionableCanteensListView, ActionableCanteenRetrieveView
-from api.views import CanteenStatusView, VideoTutorialListView, DiagnosticsToTeledeclareListView
-from api.views import InitialDataView, UnlinkSatelliteView
-from api.views import WasteActionsView, WasteActionView
-from api.views import RecipeListView
 
 urlpatterns = {
     path("loggedUser/", LoggedUserView.as_view(), name="logged_user"),
