@@ -50,7 +50,7 @@
         <template v-if="canteen.surveys.length === 0"><p>Aucun sondage en cours</p></template>
         <template v-else>
           <p v-for="survey in canteen.surveys" :key="survey.name" class="my-4">
-            <a :href="survey.url" target="_blank">
+            <a :href="survey.shareUrl" target="_blank">
               {{ survey.name }}
             </a>
           </p>
@@ -88,7 +88,6 @@
             >
               Évaluez cet établissement
             </router-link>
-            <a class="ml-2" href="">Ajouter un sondage pour cet établissement</a>
           </p>
           <p class="mb-0">
             S'agit-il d'une erreur ?

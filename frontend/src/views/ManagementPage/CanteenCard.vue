@@ -18,6 +18,9 @@
       <CanteenIndicators :canteen="canteen" />
     </v-card-subtitle>
     <v-spacer></v-spacer>
+    <v-btn @click="createCanteenSurvey" color="primary" class="mx-4">
+      Créer un sondage
+    </v-btn>
     <v-card-actions class="px-4 py-4">
       <v-spacer></v-spacer>
       <v-icon color="primary">$arrow-right-line</v-icon>
@@ -95,6 +98,18 @@ export default {
         name: "DashboardManager",
         params: { canteenUrlComponent: this.$store.getters.getCanteenUrlComponent(this.canteen) },
       }
+    },
+  },
+  methods: {
+    createCanteenSurvey() {
+      return this.$store
+        .dispatch("createCanteenSurvey", { canteenId: this.canteen.id })
+        .then((response) => {
+          window.location = response.createUrl
+        })
+        .catch((e) => {
+          this.$store.dispatch("notifyServerError", e)
+        })
     },
   },
 }

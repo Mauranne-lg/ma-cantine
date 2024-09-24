@@ -580,7 +580,7 @@ WAGTAIL_SITE_NAME = "ma-cantine"
 # WAGTAILADMIN_BASE_URL # Declare if null URL in notification emails
 WAGTAILDOCS_EXTENSIONS = ["csv", "docx", "key", "odt", "pdf", "pptx", "rtf", "txt", "xlsx", "zip"]
 
-
 # Django-form-surveys
 SURVEY_LINK_BACK_ON_SUCCESS_PAGE = "http://127.0.0.1:8000/"
-SURVEY_SHARE_LINK = "http://127.0.0.1:8000/surveys/share/"
+SURVEY_SHARE_BASE_URL = "http://127.0.0.1:8000/surveys/share/"
+SURVEY_CREATE_BASE_URL = "http://127.0.0.1:8000/surveys/dashboard/forms/"

@@ -1,7 +1,8 @@
 from rest_framework.generics import ListAPIView
-from data.models import Recipe
-from api.serializers import RecipeSerializer
+
 from api.permissions import IsAuthenticated
+from api.serializers import RecipeSerializer
+from data.models import Recipe
 
 
 class RecipeListView(ListAPIView):

@@ -4,13 +4,19 @@ from django.conf import settings
 from drf_base64.fields import Base64ImageField
 from rest_framework import serializers
 
-from data.models import Canteen, CanteenImage, Diagnostic, Sector, CanteenSurvey
-from .diagnostic import PublicDiagnosticSerializer, FullDiagnosticSerializer, CentralKitchenDiagnosticSerializer
-from .diagnostic import ApproDiagnosticSerializer
-from .diagnostic import PublicApproDiagnosticSerializer, PublicServiceDiagnosticSerializer
+from data.models import Canteen, CanteenImage, CanteenSurvey, Diagnostic, Sector
+
+from .diagnostic import (
+    ApproDiagnosticSerializer,
+    CentralKitchenDiagnosticSerializer,
+    FullDiagnosticSerializer,
+    PublicApproDiagnosticSerializer,
+    PublicDiagnosticSerializer,
+    PublicServiceDiagnosticSerializer,
+)
+from .managerinvitation import ManagerInvitationSerializer
 from .sector import SectorSerializer
 from .user import CanteenManagerSerializer
-from .managerinvitation import ManagerInvitationSerializer
 
 logger = logging.getLogger(__name__)
 
@@ -137,18 +143,27 @@ class PublicCanteenPreviewSerializer(serializers.ModelSerializer):
 
 
 class CanteenSurveySerializer(serializers.ModelSerializer):
-    url = serializers.SerializerMethodField()
+    share_url = serializers.SerializerMethodField(read_only=True)
+    create_url = serializers.SerializerMethodField(read_only=True)
+    description = serializers.CharField(required=False)
+    name = serializers.CharField(required=False)
+    canteen = serializers.CharField(required=False)
 
     class Meta:
         model = CanteenSurvey
         fields = (
             "name",
             "description",
-            "url",
+            "canteen",
+            "create_url",
+            "share_url",
         )
 
-    def get_url(self, obj):
-        return settings.SURVEY_SHARE_LINK + obj.slug
+    def get_create_url(self, obj):
+        return settings.SURVEY_CREATE_BASE_URL + obj.slug
+
+    def get_share_url(self, obj):
+        return settings.SURVEY_SHARE_BASE_URL + obj.slug
 
 
 class PublicCanteenSerializer(serializers.ModelSerializer):

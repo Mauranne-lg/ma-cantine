@@ -12,6 +12,7 @@ from api.views import (
     CanteenPurchasesSummaryView,
     CanteenStatisticsView,
     CanteenStatusView,
+    CanteenSurveyCreateView,
     CanteenWasteMeasurementsView,
     CanteenWasteMeasurementView,
     ChangePasswordView,
@@ -243,6 +244,7 @@ urlpatterns = {
     path("canteens/<int:canteen_pk>/undoClaim/", UndoClaimCanteenView.as_view(), name="undo_claim_canteen"),
     path("canteens/<int:canteen_pk>/join/", JoinCanteenView.as_view(), name="undo_claim_canteen"),
     path("canteens/<int:canteen_pk>/undoJoin/", UndoJoinCanteenView.as_view(), name="undo_join_canteen"),
+    path("canteens/<int:canteen_pk>/createSurvey/", CanteenSurveyCreateView.as_view(), name="create_survey"),
     path("actionableCanteens/<int:year>", ActionableCanteensListView.as_view(), name="list_actionable_canteens"),
     path(
         "actionableCanteens/<int:pk>/<int:year>",
